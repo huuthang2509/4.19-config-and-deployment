@@ -1,22 +1,22 @@
 ---
 - name: "Update apt package"
-  become: yes
+  # become: yes
   apt:
     update_cache: yes
 
 - name: "Upgrade packages"
-  become: yes
+  # become: yes
   apt:
     upgrade: yes
   
 - name: "Install dependencies"
-  become: yes
+  # become: yes
   shell: |
     curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
     sudo apt-get install -y nodejs
 
 - name: "Install pm2"
-  become: yes
+  # become: yes
   shell: |
     npm install pm2 -g
 
