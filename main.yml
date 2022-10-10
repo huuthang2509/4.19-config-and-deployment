@@ -1,6 +1,7 @@
 ---
 - name: Exercise for setting up a web server in an EC 
   hosts: all
+  user: ubuntu # this is the user name that you are using to ssh into the EC2 instance (user@instanceIP)
   become: true
   become_method: sudo
   become_user: root
