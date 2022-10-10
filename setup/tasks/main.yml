@@ -1,0 +1,36 @@
+---
+- name: "Update apt package"
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: "Upgrade packages"
+  become: yes
+  apt:
+    upgrade: yes
+  
+- name: "Install dependencies"
+  become: yes
+  shell: |
+    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
+    sudo apt-get install -y nodejs
+
+- name: "Install pm2"
+  become: yes
+  shell: |
+    npm install pm2 -g
+
+- name: "Create ~/web"
+  # become: yes
+  shell: |
+    pwd
+    mkdir -p ~/web
+
+- name: "Copy index.js"
+  copy:
+    src: index.js
+    dest: ~/web/index.js
+
+- name: "Start web server"
+  # become: yes
+  shell: pm2 start ~/web/index.js -f
