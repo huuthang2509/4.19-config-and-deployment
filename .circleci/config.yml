@@ -9,21 +9,15 @@ jobs:
       - checkout
       - add_ssh_keys:
           # You can get this ID in the section where you registered the SSH Key
-          fingerprints: ["4d:bb:4f:63:b1:51:54:03:ed:99:e2:de:d8:7d:4e:92"] 
+          fingerprints: ["<4d:bb:4f:63:b1:51:54:03:ed:99:e2:de:d8:7d:4e:92"] 
       - run:
           name: Install Ansible
           command: |
             apk add --update ansible
       - run:
           name: Run Playbook and Configure server
-          # command: |
-          #   ansible-playbook -i inventory main.yml
           command: |
-            sudo apt-get install unzip
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
-            aws configure list
+            ansible-playbook -i inventory main.yml
 
 workflows:
   configure_infrastructure:
